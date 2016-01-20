@@ -34,4 +34,9 @@ router.post('/:id', function(req, res, next) {
   })
 });
 
+router.post('/:id/delete', function(req, res, next) {
+  Posts().where('id', req.params.id).del().then(function (result) {
+    res.redirect('/');
+  })
+});
 module.exports = router;
