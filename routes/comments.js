@@ -17,7 +17,7 @@ router.get('/posts/:p_id/comments', function(req, res, next) {
 router.post('/posts/:p_id/comments', function(req, res, next) {
   req.body.post_id = req.params.p_id;
   Comments().insert([req.body]).then(function (result) {
-    res.redirect('/'+ req.params.p_id +'/comments');
+    res.redirect('/posts/'+ req.params.p_id +'/comments');
   })
 });
 
@@ -36,14 +36,14 @@ router.get('/posts/:p_id/comments/:c_id/edit', function(req, res, next) {
 // UPDATE COMMENT
 router.post('/posts/:p_id/comments/:c_id', function(req, res, next) {
   Comments().where('id', req.params.c_id).update(req.body).then(function (result) {
-    res.json({'SUCCESS': result})
+    res.redirect('/posts/'+ req.params.p_id +'/comments/');
   })
 });
 
 // DELETE COMMENT
 router.post('/posts/:p_id/comments/:c_id/delete', function(req, res, next) {
   Comments().where('id', req.params.c_id).del().then(function (result) {
-    res.redirect('/');
+    res.redirect('/posts/'+ req.params.p_id +'/comments');
   })
 });
 
