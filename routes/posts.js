@@ -28,4 +28,10 @@ router.get('/:id/edit', function(req, res, next) {
   res.send('200');
 });
 
+router.post('/:id', function(req, res, next) {
+  Posts().where('id', req.params.id).update(req.body).then(function (result) {
+    res.json({'SUCCESS': result})
+  })
+});
+
 module.exports = router;
