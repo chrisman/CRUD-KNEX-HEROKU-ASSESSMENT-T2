@@ -19,11 +19,13 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  console.log('id = ' + req.params.id);
   Posts().where('id', req.params.id).first().then(function (posts) {
-    console.log(posts);
     res.json({'SUCCESS': posts });
   })
+});
+
+router.get('/:id/edit', function(req, res, next) {
+  res.send('200');
 });
 
 module.exports = router;
